@@ -64,3 +64,5 @@ build/
 *.swp
 *~
 .DS_Store
+
+.idea
