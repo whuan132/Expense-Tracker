@@ -1,0 +1,36 @@
+### Get Budget by ID
+GET http://localhost:8080/api/v1/budgets/1
+Authorization: Bearer {{token}}
+
+### Get All Budgets by User ID
+GET http://localhost:8080/api/v1/budgets/user/1
+Authorization: Bearer {{token}}
+
+### Create Budget
+POST http://localhost:8080/api/v1/budgets
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "amount": 1000.00,
+  "category": "Food",
+  "description": "Monthly food budget",
+  "period": "monthly"
+}
+
+### Update Budget
+PUT http://localhost:8080/api/v1/budgets/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "amount": 250.00,
+  "category": "Travel",
+  "description": "Monthly travel budget",
+  "period": "monthly"
+}
+
+### Delete Budget
+DELETE http://localhost:8080/api/v1/budgets/1
+Authorization: Bearer {{token}}
