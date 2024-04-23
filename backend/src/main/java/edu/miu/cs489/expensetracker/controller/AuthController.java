@@ -33,7 +33,8 @@ public class AuthController {
         var auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDTO.getEmail(), userDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(auth);
         //2. create JWT
-        var token = jwtUtil.generateToken(auth);
+        var user = userService.getUserByEmail(userDTO.getEmail());
+        var token = jwtUtil.generateToken(auth, user);
         return ResponseEntity.ok(token);
     }
 

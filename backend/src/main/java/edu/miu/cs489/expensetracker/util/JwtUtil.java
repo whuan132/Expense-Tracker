@@ -1,5 +1,6 @@
 package edu.miu.cs489.expensetracker.util;
 
+import edu.miu.cs489.expensetracker.dto.UserDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -30,14 +31,15 @@ public class JwtUtil {
         }
     }
 
-    public String generateToken(Authentication auth) {
+    public String generateToken(Authentication auth, UserDTO userDTO) {
         Date issuedAt = new Date();
         Date expiration = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10); // 10 hours
 
         SecretKey key = createSecretKey(secretString);
         return Jwts.builder()
-                .claim("email", auth.getName())
-                .claim("type", "dentist")
+                .claim("id", userDTO.getId())
+                .claim("email", userDTO.getEmail())
+                .claim("username", userDTO.getUsername())
                 .issuedAt(issuedAt)
                 .expiration(expiration)
                 .signWith(key)
