@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import AppContext from "./hooks/AppContext";
+import AppRouter from "./routes/AppRoutes";
+import { jwtDecode } from "jwt-decode";
 
 function App() {
+  const [token, setToken] = useState({ token: null, data: null });
+  useEffect(() => {
+    try {
+      const token = localStorage.getItem("authToken");
+      if (token) {
+        const data = jwtDecode(token);
+        setToken({ ...token, token: token, data: data });
+      }
+    } catch (error) {}
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={{ token, setToken }}>
+      <div style={{ overflowX: "hidden" }}>
+        <AppRouter />
+      </div>
+    </AppContext.Provider>
   );
 }
 
