@@ -75,6 +75,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new NotFoundException("User not found with id: " + id));
 
         // Update user fields with data from userDTO
+        existingUser.setUsername(userDTO.getUsername());
         existingUser.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
 
         // Save the updated user

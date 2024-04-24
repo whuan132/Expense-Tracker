@@ -1,33 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
-import { jwtDecode } from "jwt-decode";
 import { useAppContext } from "../hooks/AppContext";
-import "../styles/Login.css";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Update() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const { state } = useAppContext();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { state, setState } = useAppContext();
+
+  useEffect(() => {
+    if (state.data != null) {
+      setUsername(state.data.username);
+    }
+  }, [state]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     axiosInstance
-      .post("/auth/login", {
-        email,
+      .put("/users/" + state.data.id, {
+        username,
         password,
       })
       .then((response) => {
-        const token = response.data;
-        const data = jwtDecode(token);
-        localStorage.setItem("authToken", token);
-        setState({ token, data });
+        console.log(response.data);
         navigate("/home");
       })
-      .catch((error) => {
+      .catch((response) => {
+        console.error(error);
         setError(error.response.data.errorMessage);
       });
   };
@@ -37,17 +39,17 @@ function Login() {
       <Row className="justify-content-center">
         <Col md={6}>
           <Form className="login-form" onSubmit={handleSubmit}>
-            <h2 className="mb-4">Login</h2>
+            <h2 className="mb-4">Update</h2>
 
             <InputGroup className="mb-3">
               <InputGroup.Text style={{ width: 6 + "em" }}>
-                Email
+                Username
               </InputGroup.Text>
               <Form.Control
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </InputGroup>
 
@@ -66,7 +68,7 @@ function Login() {
             {error && <p className="error-message">{error}</p>}
 
             <Button variant="primary" type="submit" className="mt-3">
-              Login
+              Update
             </Button>
           </Form>
         </Col>
@@ -75,4 +77,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Update;

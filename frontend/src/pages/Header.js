@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { token, setToken } = useAppContext();
+  const { state, setState } = useAppContext();
   const [buttonLb, setButtonLb] = useState("Login");
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function Header() {
   }, [location]);
 
   const logoutHandler = () => {
-    setToken({ token: null, data: null });
+    setState({ token: null, data: null });
     localStorage.removeItem("authToken");
     navigate("/login");
   };
@@ -42,7 +42,7 @@ function Header() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-        {token.data != null ? (
+        {state.data != null ? (
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/home">Home</Nav.Link>
@@ -59,10 +59,10 @@ function Header() {
           </Navbar.Collapse>
         )}
 
-        {token.data != null ? (
+        {state.data != null ? (
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              Signed in as: <a href="/update-info">{token.data.email}</a>
+              Signed in as: <a href="/update-info">{state.data.email}</a>
             </Navbar.Text>
             <Button variant={"link"} onClick={logoutHandler}>
               Logout

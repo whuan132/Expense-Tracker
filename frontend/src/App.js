@@ -4,19 +4,19 @@ import AppRouter from "./routes/AppRoutes";
 import { jwtDecode } from "jwt-decode";
 
 function App() {
-  const [token, setToken] = useState({ token: null, data: null });
+  const [state, setState] = useState({ token: null, data: null });
   useEffect(() => {
     try {
       const token = localStorage.getItem("authToken");
       if (token) {
         const data = jwtDecode(token);
-        setToken({ ...token, token: token, data: data });
+        setState({ ...token, token: token, data: data });
       }
     } catch (error) {}
   }, []);
 
   return (
-    <AppContext.Provider value={{ token, setToken }}>
+    <AppContext.Provider value={{ state, setState }}>
       <div style={{ overflowX: "hidden" }}>
         <AppRouter />
       </div>
