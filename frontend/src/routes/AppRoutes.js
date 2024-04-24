@@ -10,6 +10,9 @@ import Update from "../pages/Update";
 import Expenses from "../pages/Expenses";
 import AddExpense from "../pages/AddExpense";
 import EditExpense from "../pages/EditExpense";
+import Budgets from "../pages/Budgets";
+import AddBudget from "../pages/AddBudget";
+import EditBudget from "../pages/EditBudget";
 
 export default function AppRouter() {
   return (
@@ -19,14 +22,18 @@ export default function AppRouter() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
         <Route path="/update-info" element={<Update />} />
 
         <Route path="/expenses" element={<Expenses />} />
         <Route path="/add-expense" element={<AddExpense />} />
         <Route path="/edit-expense/:id" element={<EditExpense />} />
+
+        <Route path="/budgets" element={<Budgets />} />
+        <Route path="/add-budget" element={<AddBudget />} />
+        <Route path="/edit-budget/:id" element={<EditBudget />} />
       </Routes>
       <Footer />
     </BrowserRouter>
