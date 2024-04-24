@@ -9,6 +9,7 @@ import About from "../pages/About";
 import Update from "../pages/Update";
 import Expenses from "../pages/Expenses";
 import AddExpense from "../pages/AddExpense";
+import EditExpense from "../pages/EditExpense";
 
 export default function AppRouter() {
   return (
@@ -25,6 +26,7 @@ export default function AppRouter() {
 
         <Route path="/expenses" element={<Expenses />} />
         <Route path="/add-expense" element={<AddExpense />} />
+        <Route path="/edit-expense/:id" element={<EditExpense />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import axiosInstance from "../utils/axiosInstance";
 import { useAppContext } from "../hooks/AppContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-function AddExpense() {
+function EditExpense() {
+  const { id } = useParams();
   const navigate = useNavigate();
   const { state } = useAppContext();
   const [date, setDate] = useState("");
@@ -13,21 +14,26 @@ function AddExpense() {
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    axiosInstance.get("/expenses/" + id).then((response) => {
+      const expense = response.data;
+      setDate(expense.date);
+      setDescription(expense.description);
+      setCategory(expense.category);
+      setAmount(expense.amount);
+    });
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.post("/expenses", {
+      await axiosInstance.put("/expenses/" + id, {
         date: date,
         description: description,
         category: category,
         amount: amount,
         userId: state.data.id,
       });
-
-      setDate("");
-      setDescription("");
-      setCategory("");
-      setAmount("");
 
       navigate("/expenses");
     } catch (error) {
@@ -52,7 +58,7 @@ function AddExpense() {
               </Button>
             </Col>
             <Col xs={6} className="text-center">
-              <h2>Add Expense</h2>
+              <h2>Update</h2>
             </Col>
             <Col></Col>
           </Row>
@@ -94,7 +100,7 @@ function AddExpense() {
             {error && <p className="error-message">{error}</p>}
 
             <Button variant="primary" type="submit" className="mt-3">
-              Add Expense
+              Submit
             </Button>
           </Form>
         </Col>
@@ -103,4 +109,4 @@ function AddExpense() {
   );
 }
 
-export default AddExpense;
+export default EditExpense;

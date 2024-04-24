@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Row, Table } from "react-bootstrap";
-import { Link } from "react-router-dom"; // Import Link component from React Router
+import { Button, ButtonGroup, Col, Row, Table } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom"; // Import Link component from React Router
 import axiosInstance from "../utils/axiosInstance";
 import { useAppContext } from "../hooks/AppContext";
 
 function Expenses() {
+  const navigate = useNavigate();
   const { state } = useAppContext();
   const [expenses, setExpenses] = useState([]);
   const [error, setError] = useState("");
@@ -40,22 +41,27 @@ function Expenses() {
 
   return (
     <div className="mt-4">
-      <div className="text-center">
-        <h2>Expenses</h2>
-      </div>
-      {error && <p className="error-message">{error}</p>}
       <Row className="justify-content-center">
         <Col xs={12} md={10} lg={8}>
-          {" "}
-          {/* Set width to 80% on medium and large screens */}
-          <Button
-            as={Link}
-            to="/add-expense"
-            variant="primary"
-            className="mb-3"
-          >
-            Add Expense
-          </Button>
+          <Row className="justify-content-center">
+            <Col className="text-md-start">
+              <Button
+                as={Link}
+                to="/add-expense"
+                variant="primary"
+                className="mb-3"
+              >
+                Add Expense
+              </Button>
+            </Col>
+            <Col xs={6} className="text-center">
+              <h2>Expenses</h2>
+            </Col>
+            <Col></Col>
+          </Row>
+
+          {error && <p className="error-message">{error}</p>}
+
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -68,20 +74,28 @@ function Expenses() {
               </tr>
             </thead>
             <tbody>
-              {expenses.map((expense) => (
+              {expenses.map((expense, index) => (
                 <tr key={expense.id}>
-                  <td>{expense.id}</td>
+                  <td>{index + 1}</td>
                   <td>{expense.date}</td>
                   <td>{expense.description}</td>
                   <td>{expense.category}</td>
                   <td>${expense.amount}</td>
-                  <td>
-                    <Button
-                      variant="danger"
-                      onClick={() => handleDeleteExpense(expense.id)}
-                    >
-                      Delete
-                    </Button>
+                  <td style={{ width: "10%" }}>
+                    <ButtonGroup className="mb-2">
+                      <Button
+                        variant="success"
+                        onClick={() => navigate("/edit-expense/" + expense.id)}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        variant="danger"
+                        onClick={() => handleDeleteExpense(expense.id)}
+                      >
+                        Delete
+                      </Button>
+                    </ButtonGroup>
                   </td>
                 </tr>
               ))}

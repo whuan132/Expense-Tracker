@@ -24,4 +24,20 @@ instance.interceptors.request.use(
   },
 );
 
+// Add a response interceptor
+instance.interceptors.response.use(
+  (response) => {
+    // Return a successful response
+    return response;
+  },
+  (error) => {
+    // Handle error responses
+    if (error.response && error.response.status === 403) {
+      // Unauthorized error, redirect to Login page
+      // history.push("/login");
+    }
+    return Promise.reject(error);
+  },
+);
+
 export default instance;
