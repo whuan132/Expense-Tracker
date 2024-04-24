@@ -8,9 +8,8 @@ function Home() {
           <div className="text-center">
             <h2>Welcome to Expense Tracker</h2>
             <p>
-              This is the home page of the Expense Tracker application. You can
-              use this app to track your expenses, manage budgets, and analyze
-              spending habits.
+              You can use this app to track your expenses, manage budgets, and
+              analyze spending habits.
             </p>
           </div>
           <div>
