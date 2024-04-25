@@ -13,6 +13,9 @@ import EditExpense from "../pages/EditExpense";
 import Budgets from "../pages/Budgets";
 import AddBudget from "../pages/AddBudget";
 import EditBudget from "../pages/EditBudget";
+import FinancialGoals from "../pages/FinancialGoals";
+import AddFinancialGoal from "../pages/AddFinancialGoal";
+import EditFinancialGoal from "../pages/EditFinancialGoal";
 
 export default function AppRouter() {
   return (
@@ -34,6 +37,13 @@ export default function AppRouter() {
         <Route path="/budgets" element={<Budgets />} />
         <Route path="/add-budget" element={<AddBudget />} />
         <Route path="/edit-budget/:id" element={<EditBudget />} />
+
+        <Route path="/financial-goals" element={<FinancialGoals />} />
+        <Route path="/add-financial-goal" element={<AddFinancialGoal />} />
+        <Route
+          path="/edit-financial-goal/:id"
+          element={<EditFinancialGoal />}
+        />
       </Routes>
       <Footer />
     </BrowserRouter>

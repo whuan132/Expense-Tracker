@@ -48,6 +48,7 @@ function Header() {
               <Nav.Link href="/home">Home</Nav.Link>
               <Nav.Link href="/expenses">Expenses</Nav.Link>
               <Nav.Link href="/budgets">Budgets</Nav.Link>
+              <Nav.Link href="/financial-goals">FinancialGoals</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
             </Nav>
           </Navbar.Collapse>
