@@ -21,7 +21,7 @@ cd expense-tracker/backend
 3. Update the database configuration in `src/main/resources/application.properties` with your MySQL database credentials:
 
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/expense_tracker
+spring.datasource.url=jdbc:mysql://localhost:3306/expense_tracker_db
 spring.datasource.username=your-username
 spring.datasource.password=your-password
 ```
@@ -60,9 +60,7 @@ npm start
 
 ### Database (MySQL)
 
-1. Install MySQL and create a new database named `expense_tracker`.
-
-2. Run the database script provided in `backend/src/main/resources/schema.sql` to create the necessary tables.
+1. Install MySQL and create a new database named `expense_tracker_db`.
 
 ## Running the Application
 
