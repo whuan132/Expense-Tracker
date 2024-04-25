@@ -9,6 +9,7 @@ function Header() {
   const location = useLocation();
   const { state, setState } = useAppContext();
   const [buttonLb, setButtonLb] = useState("Login");
+  const [activeKey, setActiveKey] = useState(1);
 
   useEffect(() => {
     setButtonLb(location.pathname === "/login" ? "Register" : "Login");
@@ -16,6 +17,36 @@ function Header() {
     const str = location.pathname.split("/").pop();
     document.title =
       "Expense Tracker - " + str.charAt(0).toUpperCase() + str.slice(1);
+
+    // set active key
+    switch (str) {
+      case "home":
+        setActiveKey(1);
+        break;
+
+      case "expenses":
+        setActiveKey(2);
+        break;
+
+      case "budgets":
+        setActiveKey(3);
+        break;
+
+      case "financial-goals":
+        setActiveKey(4);
+        break;
+
+      case "report":
+        setActiveKey(5);
+        break;
+
+      case "about":
+        setActiveKey(6);
+        break;
+
+      default:
+        setActiveKey(0);
+    }
   }, [location]);
 
   const logoutHandler = () => {
@@ -44,19 +75,52 @@ function Header() {
 
         {state.data != null ? (
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/home">Home</Nav.Link>
-              <Nav.Link href="/expenses">Expenses</Nav.Link>
-              <Nav.Link href="/budgets">Budgets</Nav.Link>
-              <Nav.Link href="/financial-goals">FinancialGoals</Nav.Link>
-              <Nav.Link href="/about">About</Nav.Link>
+            <Nav justify variant="tabs" activeKey={activeKey}>
+              <Nav.Item>
+                <Nav.Link href="/home" eventKey="1">
+                  Home
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/expenses" eventKey="2">
+                  Expenses
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/budgets" eventKey="3">
+                  Budgets
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/financial-goals" eventKey="4">
+                  FinancialGoals
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/report" eventKey="5">
+                  Report
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/about" eventKey="6">
+                  About
+                </Nav.Link>
+              </Nav.Item>
             </Nav>
           </Navbar.Collapse>
         ) : (
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/home">Home</Nav.Link>
-              <Nav.Link href="/about">About</Nav.Link>
+            <Nav justify variant="tabs" activeKey={activeKey}>
+              <Nav.Item>
+                <Nav.Link href="/home" eventKey="1">
+                  Home
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/about" eventKey="6">
+                  About
+                </Nav.Link>
+              </Nav.Item>
             </Nav>
           </Navbar.Collapse>
         )}
