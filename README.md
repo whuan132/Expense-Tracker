@@ -55,7 +55,7 @@ npm install
 3. Start the React development server:
 
 ```bash
-npm start
+npm run start
 ```
 
 ### Database (MySQL)
