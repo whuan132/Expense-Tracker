@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom"; // Import Link component f
 import axiosInstance from "../utils/axiosInstance";
 import { useAppContext } from "../hooks/AppContext";
 import Loading from "../components/Loading";
+import { formatUSD } from "../utils/Formatter";
 
 function Expenses() {
   const navigate = useNavigate();
@@ -88,9 +89,9 @@ function Expenses() {
                     <td>{expense.date}</td>
                     <td>{expense.description}</td>
                     <td>{expense.category}</td>
-                    <td>${expense.amount}</td>
+                    <td>{formatUSD(expense.amount)}</td>
                     <td style={{ width: "10%" }}>
-                      <ButtonGroup className="mb-2">
+                      <ButtonGroup className="mb-2" size="sm">
                         <Button
                           variant="success"
                           onClick={() =>

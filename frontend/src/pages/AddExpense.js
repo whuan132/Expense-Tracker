@@ -94,7 +94,7 @@ function AddExpense() {
             {error && <p className="error-message">{error}</p>}
 
             <Button variant="primary" type="submit" className="mt-3">
-              Add Expense
+              Submit
             </Button>
           </Form>
         </Col>

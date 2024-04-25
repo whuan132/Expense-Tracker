@@ -4,6 +4,7 @@ import { Button, ButtonGroup, Col, Row, Table } from "react-bootstrap";
 import axiosInstance from "../utils/axiosInstance";
 import { useAppContext } from "../hooks/AppContext";
 import Loading from "../components/Loading";
+import { formatUSD } from "../utils/Formatter";
 
 function Budgets() {
   const navigate = useNavigate();
@@ -88,9 +89,9 @@ function Budgets() {
                     <td>{budget.period}</td>
                     <td>{budget.description}</td>
                     <td>{budget.category}</td>
-                    <td>${budget.amount}</td>
+                    <td>{formatUSD(budget.amount)}</td>
                     <td style={{ width: "10%" }}>
-                      <ButtonGroup className="mb-2">
+                      <ButtonGroup className="mb-2" size="sm">
                         <Button
                           variant="success"
                           onClick={() => navigate("/edit-budget/" + budget.id)}
