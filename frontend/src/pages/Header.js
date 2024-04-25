@@ -14,39 +14,35 @@ function Header() {
   useEffect(() => {
     setButtonLb(location.pathname === "/login" ? "Register" : "Login");
     // set title
-    const str = location.pathname.split("/").pop();
+    const str = location.pathname.split("/")[1];
     document.title =
-      "Expense Tracker - " + str.charAt(0).toUpperCase() + str.slice(1);
+      "Expense Tracker - " +
+      (str === "" ? "Home" : str.charAt(0).toUpperCase() + str.slice(1));
 
     // set active key
-    switch (str) {
-      case "home":
-        setActiveKey(1);
-        break;
-
-      case "expenses":
-        setActiveKey(2);
-        break;
-
-      case "budgets":
-        setActiveKey(3);
-        break;
-
-      case "financial-goals":
-        setActiveKey(4);
-        break;
-
-      case "report":
-        setActiveKey(5);
-        break;
-
-      case "about":
-        setActiveKey(6);
-        break;
-
-      default:
-        setActiveKey(0);
-    }
+    if (location.pathname.endsWith("/home")) setActiveKey(1);
+    else if (
+      location.pathname.endsWith("/expenses") ||
+      location.pathname.endsWith("/add-expense") ||
+      location.pathname.startsWith("/edit-expense/")
+    )
+      setActiveKey(2);
+    else if (
+      location.pathname.endsWith("/budgets") ||
+      location.pathname.endsWith("/add-budget") ||
+      location.pathname.startsWith("/edit-budget/")
+    )
+      setActiveKey(3);
+    else if (
+      location.pathname.endsWith("/financial-goals") ||
+      location.pathname.endsWith("/add-financial-goal") ||
+      location.pathname.startsWith("/edit-financial-goal/")
+    )
+      setActiveKey(4);
+    else if (location.pathname.endsWith("/report")) setActiveKey(5);
+    else if (location.pathname.endsWith("/about")) setActiveKey(6);
+    else if (str === "") setActiveKey(1);
+    else setActiveKey(0);
   }, [location]);
 
   const logoutHandler = () => {
