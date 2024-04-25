@@ -9,7 +9,7 @@ This is a web application built with Spring Boot for the backend, React for the 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/expense-tracker.git
+git clone https://github.com/maharishi-university/final-project-whuan132-1.git
 ```
 
 2. Navigate to the backend directory:
@@ -64,7 +64,11 @@ npm start
 
 ## Running the Application
 
-Once the backend server and frontend development server are running, you can access the Expense Tracker application in your web browser at `http://localhost:3000`.
+Once the backend server and frontend development server are running, you can access the Expense Tracker application in your web browser at
+
+```bash
+http://localhost:3000
+```
 
 ## Deployment with Docker Compose
 
@@ -80,7 +84,11 @@ To deploy the application using Docker Compose:
 docker-compose up --build
 ```
 
-4. Access the application in your web browser at `http://localhost:3000`.
+4. Access the application in your web browser at
+
+```bash
+http://localhost:3000
+```
 
 ## Additional Notes
 
